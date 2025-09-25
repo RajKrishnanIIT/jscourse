@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Testing JavaScript Code - Interactive Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/module/9">
+                    <i class="fas fa-arrow-left"></i> Back to Module 9
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">
+                <i class="fas fa-vial"></i> Module 9: Testing JavaScript Code
+            </h1>
+            <p class="lead">Learn to write reliable tests and practice Test-Driven Development</p>
+            <div class="alert alert-info">
+                <strong>💡 Tip:</strong> This demo includes a working test framework! Try writing your own tests to see immediate results.
+            </div>
+        </div>
+
+        <!-- Quick Test -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h3><i class="fas fa-play-circle"></i> Quick Test</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <p>Test that the testing framework is ready</p>
+                            <button class="btn btn-info btn-lg" onclick="quickTest()">
+                                <i class="fas fa-play"></i> Run Quick Test
+                            </button>
+                            <div id="quickTestResult" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Unit Testing -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-flask"></i> 1. Unit Testing</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Run Unit Tests</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="testType" class="form-label">Test Suite:</label>
+                                        <select class="form-select mb-2" id="testType">
+                                            <option value="math">Math Functions</option>
+                                            <option value="string">String Utilities</option>
+                                            <option value="array">Array Operations</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-success me-2" onclick="runUnitTestDemo()">Run Test Suite</button>
+                                        <button class="btn btn-secondary" onclick="clearUnitTestLog()">Clear Results</button>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <h6>Custom Test:</h6>
+                                        <div class="demo-controls mb-3">
+                                            <label for="customTestName" class="form-label">Test Name:</label>
+                                            <input type="text" class="form-control mb-2" id="customTestName" placeholder="My custom test">
+                                            
+                                            <label for="customTestCode" class="form-label">Test Code:</label>
+                                            <textarea class="form-control mb-2" id="customTestCode" rows="3" placeholder="return testFramework.expect(2 + 2).toBe(4);"></textarea>
+                                            
+                                            <button class="btn btn-primary" onclick="runCustomTest()">Run Custom Test</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Test Results:</h6>
+                                        <div id="unitTestResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Run Test Suite" to see unit testing in action...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Unit Testing Example
+
+// Function to test
+function add(a, b) {
+    return a + b;
+}
+
+// Unit test
+test('should add two numbers correctly', () => {
+    // Arrange
+    const a = 2;
+    const b = 3;
+    
+    // Act
+    const result = add(a, b);
+    
+    // Assert
+    expect(result).toBe(5);
+});
+
+// Test framework methods available:
+expect(actual).toBe(expected)
+expect(actual).toEqual(expected)
+expect(actual).toBeGreaterThan(expected)
+expect(actual).toContain(expected)</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Unit Testing Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Catches bugs early in development</li>
+                                            <li>Ensures code works as expected</li>
+                                            <li>Makes refactoring safer</li>
+                                            <li>Documents expected behavior</li>
+                                            <li>Improves code quality and reliability</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Test-Driven Development (TDD) -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-recycle"></i> 2. Test-Driven Development (TDD)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: TDD Cycle</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="tddStep" class="form-label">TDD Phase:</label>
+                                        <select class="form-select mb-2" id="tddStep">
+                                            <option value="red">🔴 Red - Write Failing Test</option>
+                                            <option value="green">🟢 Green - Make Test Pass</option>
+                                            <option value="refactor">🔵 Refactor - Improve Code</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-danger me-2" onclick="runTDDDemo()">Show TDD Phase</button>
+                                        <button class="btn btn-secondary" onclick="clearTDDLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 TDD Process:</h6>
+                                        <div id="tddResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Select a TDD phase and click "Show TDD Phase" to learn...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// TDD Cycle: Red-Green-Refactor
+
+// 1. RED: Write a failing test first
+test('Calculator should add numbers', () => {
+    const calc = new Calculator();
+    expect(calc.add(2, 3)).toBe(5);
+    // This fails because Calculator doesn't exist yet
+});
+
+// 2. GREEN: Write minimal code to pass
+class Calculator {
+    add(a, b) {
+        return a + b; // Just enough to pass
+    }
+}
+
+// 3. REFACTOR: Improve the code
+class Calculator {
+    add(a, b) {
+        // Add validation and error handling
+        if (typeof a !== 'number' || typeof b !== 'number') {
+            throw new Error('Arguments must be numbers');
+        }
+        return a + b;
+    }
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>TDD Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Ensures every line of code is tested</li>
+                                            <li>Forces you to think about requirements</li>
+                                            <li>Creates a comprehensive test suite</li>
+                                            <li>Results in better code design</li>
+                                            <li>Provides immediate feedback</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Testing Frameworks -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-tools"></i> 3. Testing Frameworks</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Framework Comparison</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="frameworkType" class="form-label">Testing Framework:</label>
+                                        <select class="form-select mb-2" id="frameworkType">
+                                            <option value="jest">Jest - Popular & Feature-Rich</option>
+                                            <option value="mocha">Mocha - Flexible & Configurable</option>
+                                            <option value="jasmine">Jasmine - BDD Style</option>
+                                            <option value="vitest">Vitest - Modern & Fast</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-warning me-2" onclick="runFrameworkDemo()">Explore Framework</button>
+                                        <button class="btn btn-secondary" onclick="clearFrameworkLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Framework Details:</h6>
+                                        <div id="frameworkResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Select a framework and click "Explore Framework"...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Jest Example
+describe('User Service', () => {
+    test('should create user', () => {
+        const user = new User('John', 'john@test.com');
+        expect(user.name).toBe('John');
+        expect(user.email).toBe('john@test.com');
+    });
+
+    test('should validate email', () => {
+        expect(() => {
+            new User('John', 'invalid-email');
+        }).toThrow('Invalid email');
+    });
+});
+
+// Mocha + Chai Example
+describe('User Service', function() {
+    it('should create user', function() {
+        const user = new User('John', 'john@test.com');
+        expect(user.name).to.equal('John');
+        expect(user.email).to.equal('john@test.com');
+    });
+});</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Framework Selection Criteria:</strong>
+                                        <ul class="small">
+                                            <li><strong>Jest:</strong> Great for React, zero config</li>
+                                            <li><strong>Mocha:</strong> Highly flexible, works with any assertion library</li>
+                                            <li><strong>Jasmine:</strong> BDD style, no dependencies</li>
+                                            <li><strong>Vitest:</strong> Modern, fast, Vite integration</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Mocking and Spies -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h3><i class="fas fa-mask"></i> 4. Mocking and Spies</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Mock Types</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="mockType" class="form-label">Mock Type:</label>
+                                        <select class="form-select mb-2" id="mockType">
+                                            <option value="function">Function Mock</option>
+                                            <option value="api">API Mock</option>
+                                            <option value="timer">Timer Mock</option>
+                                            <option value="module">Module Mock</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-info me-2" onclick="runMockingDemo()">Show Mocking Example</button>
+                                        <button class="btn btn-secondary" onclick="clearMockingLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Mocking Examples:</h6>
+                                        <div id="mockingResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Select a mock type and click "Show Mocking Example"...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Function Mocking
+const mockCallback = jest.fn();
+mockCallback.mockReturnValue(42);
+
+// Test function that uses callback
+function processData(data, callback) {
+    return callback(data);
+}
+
+test('should call callback with data', () => {
+    const result = processData('test', mockCallback);
+    expect(mockCallback).toHaveBeenCalledWith('test');
+    expect(result).toBe(42);
+});
+
+// API Mocking
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+mockedAxios.get.mockResolvedValue({
+    data: { users: [{ id: 1, name: 'John' }] }
+});
+
+// Timer Mocking
+jest.useFakeTimers();
+setTimeout(callback, 1000);
+jest.advanceTimersByTime(1000);
+expect(callback).toHaveBeenCalled();</code></pre>
+                                    <div class="mt-2">
+                                        <strong>When to Use Mocks:</strong>
+                                        <ul class="small">
+                                            <li>External API calls</li>
+                                            <li>Database operations</li>
+                                            <li>File system access</li>
+                                            <li>Time-dependent functions</li>
+                                            <li>Complex dependencies</li>
+                                            <li>Slow or expensive operations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Best Practices -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-star"></i> 5. Testing Best Practices</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Best Practice Guidelines</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="practiceCategory" class="form-label">Practice Category:</label>
+                                        <select class="form-select mb-2" id="practiceCategory">
+                                            <option value="naming">Test Naming Conventions</option>
+                                            <option value="structure">Test Structure (AAA)</option>
+                                            <option value="coverage">Code Coverage</option>
+                                            <option value="isolation">Test Isolation</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-primary me-2" onclick="runBestPracticesDemo()">Show Best Practices</button>
+                                        <button class="btn btn-success me-2" onclick="runTestingQuiz()">Quick Quiz</button>
+                                        <button class="btn btn-secondary" onclick="clearBestPracticesLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Best Practices:</h6>
+                                        <div id="bestPracticesResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Select a category and click "Show Best Practices"...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// AAA Pattern (Arrange-Act-Assert)
+test('should calculate discount correctly', () => {
+    // Arrange
+    const originalPrice = 100;
+    const discountPercent = 20;
+    const calculator = new PriceCalculator();
+    
+    // Act
+    const finalPrice = calculator.applyDiscount(
+        originalPrice, 
+        discountPercent
+    );
+    
+    // Assert
+    expect(finalPrice).toBe(80);
+});
+
+// Good test naming
+test('should return error when email is invalid', () => {
+    // Test implementation
+});
+
+// Test isolation
+beforeEach(() => {
+    // Fresh setup for each test
+    database.clear();
+    user = new User();
+});</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Universal Testing Principles:</strong>
+                                        <ul class="small">
+                                            <li>📝 Write descriptive test names</li>
+                                            <li>🏗️ Follow AAA pattern</li>
+                                            <li>🔒 Keep tests isolated</li>
+                                            <li>⚡ Make tests fast</li>
+                                            <li>🎯 Test behavior, not implementation</li>
+                                            <li>📊 Aim for good coverage</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Module Button -->
+        <div class="text-center mb-5">
+            <a href="/module/9" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 9
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-9.js"></script>
+</body>
+</html>

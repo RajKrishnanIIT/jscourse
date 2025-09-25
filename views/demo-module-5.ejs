@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 5 Demo: DOM Manipulation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/5">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/5">Module 5: DOM Manipulation</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-code"></i> DOM Manipulation Demo</h1>
+            <p class="lead">Learn to interact with web page elements dynamically</p>
+        </div>
+
+        <!-- Quick Test Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-play"></i> Quick Test</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info me-2" onclick="quickTest()">Test JavaScript</button>
+                        <span id="quickTestResult" class="ms-3"><em>Click the button to test JavaScript...</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Selecting Elements -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-mouse-pointer"></i> 1. Selecting Elements</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Element Selection</h5>
+                                    <div class="demo-controls mb-3">
+                                        <!-- Demo elements to select -->
+                                        <div class="mb-3 p-3 border rounded">
+                                            <h6>Demo Elements:</h6>
+                                            <p id="demo-paragraph">This is a paragraph with ID "demo-paragraph"</p>
+                                            <span class="demo-span text-primary">Span with class "demo-span"</span><br>
+                                            <button class="btn btn-sm btn-secondary mt-2" id="demo-button">Button with ID "demo-button"</button>
+                                            <div class="demo-div bg-light p-2 mt-2">Div with class "demo-div"</div>
+                                        </div>
+                                        
+                                        <label for="selectorInput" class="form-label">Enter CSS Selector:</label>
+                                        <input type="text" class="form-control mb-2" id="selectorInput" placeholder="#demo-paragraph">
+                                        
+                                        <button class="btn btn-primary me-2" onclick="selectElement()">Select Element</button>
+                                        <button class="btn btn-secondary" onclick="selectAllElements()">Select All</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="selectorResult" class="border p-3 bg-light" style="min-height: 100px;">
+                                            <em class="text-muted">Try selectors like: #demo-paragraph, .demo-span, button, .demo-div</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Selecting Elements
+// By ID
+const paragraph = document.getElementById('demo-paragraph');
+
+// By Class (first match)
+const span = document.querySelector('.demo-span');
+
+// By Tag
+const button = document.querySelector('button');
+
+// All elements with class
+const allDivs = document.querySelectorAll('.demo-div');
+
+// CSS Selector
+const element = document.querySelector('#demo-paragraph');
+
+console.log(element.textContent);
+console.log(element.className);
+console.log(element.tagName);</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Selection Methods:</strong>
+                                        <ul class="small">
+                                            <li><code>getElementById()</code> - Select by ID</li>
+                                            <li><code>querySelector()</code> - First match</li>
+                                            <li><code>querySelectorAll()</code> - All matches</li>
+                                            <li><code>getElementsByClassName()</code> - By class</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Event Handling -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-bolt"></i> 2. Event Handling</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Interactive Elements</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3 p-3 border rounded">
+                                            <h6>Interactive Demo:</h6>
+                                            <button class="btn btn-primary me-2" id="clickDemo">Click Me!</button>
+                                            <button class="btn btn-warning me-2" id="hoverDemo">Hover Me!</button><br>
+                                            <input type="text" class="form-control mt-2" id="inputDemo" placeholder="Type something...">
+                                            <div id="mouseArea" class="bg-light p-3 mt-2 border" style="height: 80px; cursor: pointer;">
+                                                <small>Move mouse here and click!</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-success me-2" onclick="setupEventListeners()">Setup Event Listeners</button>
+                                        <button class="btn btn-secondary" onclick="removeEventListeners()">Remove Listeners</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Event Log:</h6>
+                                        <div id="eventResult" class="border p-3 bg-light" style="min-height: 100px; max-height: 200px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Setup Event Listeners" then interact with elements above...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Event Handling
+const button = document.getElementById('clickDemo');
+
+// Click event
+button.addEventListener('click', function(event) {
+    console.log('Button clicked!');
+    event.target.style.backgroundColor = 'red';
+});
+
+// Mouse events
+element.addEventListener('mouseenter', function() {
+    console.log('Mouse entered!');
+});
+
+element.addEventListener('mouseleave', function() {
+    console.log('Mouse left!');
+});
+
+// Input events
+input.addEventListener('input', function(event) {
+    console.log('Input value:', event.target.value);
+});
+
+// Key events
+input.addEventListener('keydown', function(event) {
+    console.log('Key pressed:', event.key);
+});</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Common Events:</strong>
+                                        <ul class="small">
+                                            <li><strong>click</strong> - Mouse click</li>
+                                            <li><strong>mouseenter/mouseleave</strong> - Mouse hover</li>
+                                            <li><strong>input</strong> - Input value change</li>
+                                            <li><strong>keydown/keyup</strong> - Keyboard events</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Modifying Content -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-edit"></i> 3. Modifying Content</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Content Modification</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3 p-3 border rounded">
+                                            <h6>Target Elements:</h6>
+                                            <p id="contentDemo">Original paragraph text</p>
+                                            <ul id="listDemo">
+                                                <li>Original item 1</li>
+                                                <li>Original item 2</li>
+                                            </ul>
+                                            <div id="htmlDemo"><strong>Original HTML content</strong></div>
+                                        </div>
+                                        
+                                        <label for="newText" class="form-label">New Text Content:</label>
+                                        <input type="text" class="form-control mb-2" id="newText" placeholder="Enter new text">
+                                        
+                                        <label for="newHtml" class="form-label">New HTML Content:</label>
+                                        <input type="text" class="form-control mb-2" id="newHtml" placeholder="<em>Enter HTML</em>">
+                                        
+                                        <button class="btn btn-warning me-2" onclick="changeText()">Change Text</button>
+                                        <button class="btn btn-info me-2" onclick="changeHtml()">Change HTML</button>
+                                        <button class="btn btn-success me-2" onclick="addListItem()">Add List Item</button>
+                                        <button class="btn btn-secondary" onclick="resetContent()">Reset</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="contentResult" class="border p-3 bg-light" style="min-height: 80px;">
+                                            <em class="text-muted">Use the buttons above to modify content...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Modifying Content
+const element = document.getElementById('contentDemo');
+
+// Change text content (safe from XSS)
+element.textContent = 'New text content';
+
+// Change HTML content (be careful with user input)
+element.innerHTML = '<strong>New HTML content</strong>';
+
+// Get content
+const text = element.textContent;
+const html = element.innerHTML;
+
+// Add to lists
+const list = document.getElementById('listDemo');
+const newItem = document.createElement('li');
+newItem.textContent = 'New item';
+list.appendChild(newItem);
+
+// Create and append elements
+const newDiv = document.createElement('div');
+newDiv.textContent = 'Created with JavaScript';
+document.body.appendChild(newDiv);</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Content Methods:</strong>
+                                        <ul class="small">
+                                            <li><code>textContent</code> - Plain text (safe)</li>
+                                            <li><code>innerHTML</code> - HTML content</li>
+                                            <li><code>createElement()</code> - Create elements</li>
+                                            <li><code>appendChild()</code> - Add to DOM</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: CSS Manipulation -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-palette"></i> 4. CSS Manipulation</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Style Changes</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3 p-3 border rounded">
+                                            <h6>Style Target:</h6>
+                                            <div id="styleDemo" class="p-3 border" style="background-color: lightblue; color: black; font-size: 16px;">
+                                                This box will be styled dynamically!
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-6">
+                                                <label for="bgColor" class="form-label">Background Color:</label>
+                                                <input type="color" class="form-control" id="bgColor" value="#ADD8E6">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="textColor" class="form-label">Text Color:</label>
+                                                <input type="color" class="form-control" id="textColor" value="#000000">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-6">
+                                                <label for="fontSize" class="form-label">Font Size:</label>
+                                                <input type="range" class="form-range" id="fontSize" min="12" max="32" value="16">
+                                                <small class="text-muted">16px</small>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="borderWidth" class="form-label">Border Width:</label>
+                                                <input type="range" class="form-range" id="borderWidth" min="0" max="10" value="1">
+                                                <small class="text-muted">1px</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-danger me-2" onclick="applyStyles()">Apply Styles</button>
+                                        <button class="btn btn-info me-2" onclick="addCssClass()">Add Class</button>
+                                        <button class="btn btn-warning me-2" onclick="toggleVisibility()">Toggle Visibility</button>
+                                        <button class="btn btn-secondary" onclick="resetStyles()">Reset</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="styleResult" class="border p-3 bg-light" style="min-height: 80px;">
+                                            <em class="text-muted">Use the controls above to style the blue box...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// CSS Manipulation
+const element = document.getElementById('styleDemo');
+
+// Direct style changes
+element.style.backgroundColor = 'red';
+element.style.color = 'white';
+element.style.fontSize = '20px';
+element.style.border = '2px solid black';
+
+// CSS Classes
+element.classList.add('new-class');
+element.classList.remove('old-class');
+element.classList.toggle('active');
+
+// Check if class exists
+if (element.classList.contains('active')) {
+    console.log('Element has active class');
+}
+
+// Visibility
+element.style.display = 'none';  // Hide
+element.style.display = 'block'; // Show
+
+// Get computed styles
+const styles = window.getComputedStyle(element);
+console.log(styles.color);</code></pre>
+                                    <div class="mt-2">
+                                        <strong>CSS Methods:</strong>
+                                        <ul class="small">
+                                            <li><code>element.style.property</code> - Direct styling</li>
+                                            <li><code>classList.add/remove/toggle</code> - Classes</li>
+                                            <li><code>getComputedStyle()</code> - Get current styles</li>
+                                            <li><code>display: none/block</code> - Show/hide</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice: Interactive Todo List</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Build a todo list that demonstrates all DOM manipulation concepts:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3">
+                                            <label for="todoInput" class="form-label">Add Todo Item:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="todoInput" placeholder="Enter todo item">
+                                                <button class="btn btn-success" onclick="addTodo()">Add</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-warning me-2" onclick="clearCompleted()">Clear Completed</button>
+                                            <button class="btn btn-secondary" onclick="clearAllTodos()">Clear All</button>
+                                        </div>
+                                        
+                                        <!-- Todo List Display -->
+                                        <div class="border rounded p-3" style="min-height: 200px; max-height: 300px; overflow-y: auto;">
+                                            <h6>📝 Todo List:</h6>
+                                            <ul id="todoList" class="list-unstyled">
+                                                <li class="text-muted"><em>No todos yet. Add some above!</em></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Todo List Code:</h5>
+                                    <pre class="bg-light p-3 rounded small"><code>// Todo List Implementation
+let todoCount = 0;
+
+function addTodo() {
+    const input = document.getElementById('todoInput');
+    const todoText = input.value.trim();
+    
+    if (!todoText) return;
+    
+    // Create todo item
+    const li = document.createElement('li');
+    li.className = 'todo-item d-flex align-items-center mb-2';
+    li.innerHTML = `
+        <input type="checkbox" class="me-2" onchange="toggleTodo(this)">
+        <span class="flex-grow-1">${todoText}</span>
+        <button class="btn btn-sm btn-danger" onclick="deleteTodo(this)">
+            <i class="fas fa-trash"></i>
+        </button>
+    `;
+    
+    // Add to list
+    const todoList = document.getElementById('todoList');
+    if (todoList.children[0]?.tagName !== 'LI' || 
+        todoList.children[0].textContent.includes('No todos')) {
+        todoList.innerHTML = '';
+    }
+    todoList.appendChild(li);
+    
+    // Clear input
+    input.value = '';
+    todoCount++;
+}</code></pre>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Todo Stats:</h6>
+                                        <div id="todoResult" class="border p-3 bg-light" style="min-height: 80px;">
+                                            <em class="text-muted">Todo statistics will appear here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="text-center mb-5">
+            <a href="/module/5" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 5
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-5.js"></script>
+</body>
+</html>

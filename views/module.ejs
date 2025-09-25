@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module <%= module.id %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/modules">API</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Module <%= module.id %>: <%= module.title %></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">
+                            <span class="badge bg-light text-primary me-2">Module <%= module.id %></span>
+                            <%= module.title %>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead"><%= module.description %></p>
+                        
+                        <div class="mb-4">
+                            <h4>Topics Covered in This Module:</h4>
+                            <div class="row">
+                                <% module.topics.forEach((topic, index) => { %>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="topic-item p-2 bg-light rounded">
+                                            <i class="fas fa-bookmark text-primary me-2"></i>
+                                            <%= topic %>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-lightbulb"></i> Learning Objectives</h5>
+                            <p>By the end of this module, you will be able to:</p>
+                            <ul>
+                                <% module.topics.forEach(topic => { %>
+                                    <li>Understand and apply concepts related to <%= topic.toLowerCase() %></li>
+                                <% }); %>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex gap-3 mt-4">
+                            <a href="/download/<%= module.id %>" class="btn btn-success btn-lg">
+                                <i class="fas fa-download"></i> Download PDF
+                            </a>
+                            <a href="/demo/<%= module.id %>" class="btn btn-warning btn-lg">
+                                <i class="fas fa-code"></i> Interactive Demo
+                            </a>
+                            <% if (module.id > 1) { %>
+                                <a href="/module/<%= module.id - 1 %>" class="btn btn-outline-primary">
+                                    <i class="fas fa-arrow-left"></i> Previous Module
+                                </a>
+                            <% } %>
+                            <% if (module.id < 10) { %>
+                                <a href="/module/<%= module.id + 1 %>" class="btn btn-outline-primary">
+                                    Next Module <i class="fas fa-arrow-right"></i>
+                                </a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i> Course Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-success" style="width: <%= (module.id / 10) * 100 %>%">
+                                <%= module.id %>/10 Modules
+                            </div>
+                        </div>
+                        <p class="text-muted">You are currently on module <%= module.id %> of 10</p>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-book"></i> All Modules</h5>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <% for(let i = 1; i <= 10; i++) { %>
+                            <a href="/module/<%= i %>" class="list-group-item list-group-item-action <%= i === module.id ? 'active' : '' %>">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Module <%= i %></span>
+                                    <% if (i === module.id) { %>
+                                        <i class="fas fa-arrow-right"></i>
+                                    <% } %>
+                                </div>
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

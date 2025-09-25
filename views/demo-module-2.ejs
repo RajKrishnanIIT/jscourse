@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 2 Demo: Control Structures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/2">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/2">Module 2: Control Structures</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-play-circle"></i> Control Structures Demo</h1>
+            <p class="lead">Interactive examples of if/else statements, switch cases, and loops</p>
+        </div>
+
+        <!-- Demo Navigation -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Jump to Section:</h5>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-outline-primary" onclick="scrollToSection('if-else')">If/Else Statements</button>
+                            <button class="btn btn-outline-primary" onclick="scrollToSection('switch')">Switch Cases</button>
+                            <button class="btn btn-outline-primary" onclick="scrollToSection('for-loops')">For Loops</button>
+                            <button class="btn btn-outline-primary" onclick="scrollToSection('while-loops')">While Loops</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: If/Else Statements -->
+        <section id="if-else" class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h3><i class="fas fa-question-circle"></i> If/Else Statements</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 1: Age Checker</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="ageInput" class="form-label">Enter your age:</label>
+                                        <input type="number" class="form-control" id="ageInput" placeholder="25" min="0" max="120">
+                                        <button class="btn btn-primary mt-2" onclick="checkAge()">Check Age Category</button>
+                                    </div>
+                                    <div id="ageResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function checkAge() {
+    const age = parseInt(document.getElementById('ageInput').value);
+    let category;
+    
+    if (age < 13) {
+        category = "Child";
+    } else if (age < 20) {
+        category = "Teenager";
+    } else if (age < 60) {
+        category = "Adult";
+    } else {
+        category = "Senior";
+    }
+    
+    document.getElementById('ageResult').textContent = 
+        `Age ${age}: You are a ${category}`;
+    document.getElementById('ageResult').className = 
+        'alert alert-success';
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 2: Grade Calculator</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="scoreInput" class="form-label">Enter test score (0-100):</label>
+                                        <input type="number" class="form-control" id="scoreInput" placeholder="85" min="0" max="100">
+                                        <button class="btn btn-primary mt-2" onclick="calculateGrade()">Calculate Grade</button>
+                                    </div>
+                                    <div id="gradeResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function calculateGrade() {
+    const score = parseInt(document.getElementById('scoreInput').value);
+    let grade, message;
+    
+    if (score >= 90) {
+        grade = "A";
+        message = "Excellent!";
+    } else if (score >= 80) {
+        grade = "B";
+        message = "Good job!";
+    } else if (score >= 70) {
+        grade = "C";
+        message = "Not bad!";
+    } else if (score >= 60) {
+        grade = "D";
+        message = "Needs improvement";
+    } else {
+        grade = "F";
+        message = "Study harder!";
+    }
+    
+    document.getElementById('gradeResult').innerHTML = 
+        `Score: ${score}<br>Grade: ${grade}<br>${message}`;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Switch Cases -->
+        <section id="switch" class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-toggle-on"></i> Switch Cases</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 1: Day of the Week</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="daySelect" class="form-label">Select a day:</label>
+                                        <select class="form-select" id="daySelect">
+                                            <option value="1">Monday</option>
+                                            <option value="2">Tuesday</option>
+                                            <option value="3">Wednesday</option>
+                                            <option value="4">Thursday</option>
+                                            <option value="5">Friday</option>
+                                            <option value="6">Saturday</option>
+                                            <option value="7">Sunday</option>
+                                        </select>
+                                        <button class="btn btn-success mt-2" onclick="getDayInfo()">Get Day Info</button>
+                                    </div>
+                                    <div id="dayResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function getDayInfo() {
+    const day = parseInt(document.getElementById('daySelect').value);
+    let dayName, type, mood;
+    
+    switch (day) {
+        case 1:
+            dayName = "Monday";
+            type = "Weekday";
+            mood = "😴 Monday Blues";
+            break;
+        case 2:
+            dayName = "Tuesday";
+            type = "Weekday";
+            mood = "💪 Getting Started";
+            break;
+        case 3:
+            dayName = "Wednesday";
+            type = "Weekday";
+            mood = "🐪 Hump Day";
+            break;
+        case 4:
+            dayName = "Thursday";
+            type = "Weekday";
+            mood = "🎯 Almost There";
+            break;
+        case 5:
+            dayName = "Friday";
+            type = "Weekday";
+            mood = "🎉 TGIF!";
+            break;
+        case 6:
+            dayName = "Saturday";
+            type = "Weekend";
+            mood = "😎 Chill Time";
+            break;
+        case 7:
+            dayName = "Sunday";
+            type = "Weekend";
+            mood = "😌 Rest Day";
+            break;
+        default:
+            dayName = "Unknown";
+            type = "Invalid";
+            mood = "❓ What day?";
+    }
+    
+    document.getElementById('dayResult').innerHTML = 
+        `${dayName} - ${type}<br>${mood}`;
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 2: Calculator</h5>
+                                    <div class="demo-controls mb-3">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <input type="number" class="form-control" id="num1" placeholder="First number">
+                                            </div>
+                                            <div class="col-4">
+                                                <select class="form-select" id="operation">
+                                                    <option value="+">+ Add</option>
+                                                    <option value="-">- Subtract</option>
+                                                    <option value="*">× Multiply</option>
+                                                    <option value="/">÷ Divide</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="number" class="form-control" id="num2" placeholder="Second number">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-success mt-2" onclick="calculate()">Calculate</button>
+                                    </div>
+                                    <div id="calcResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function calculate() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const operation = document.getElementById('operation').value;
+    let result;
+    
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 !== 0) {
+                result = num1 / num2;
+            } else {
+                result = "Cannot divide by zero!";
+            }
+            break;
+        default:
+            result = "Invalid operation";
+    }
+    
+    document.getElementById('calcResult').textContent = 
+        `${num1} ${operation} ${num2} = ${result}`;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: For Loops -->
+        <section id="for-loops" class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-sync"></i> For Loops</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 1: Multiplication Table</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="tableNumber" class="form-label">Enter number for multiplication table:</label>
+                                        <input type="number" class="form-control" id="tableNumber" placeholder="5" min="1" max="20">
+                                        <button class="btn btn-warning mt-2" onclick="generateTable()">Generate Table</button>
+                                    </div>
+                                    <div id="tableResult" class="alert alert-info d-none" style="max-height: 300px; overflow-y: auto;"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function generateTable() {
+    const number = parseInt(document.getElementById('tableNumber').value);
+    let table = `<strong>Multiplication Table for ${number}:</strong><br><br>`;
+    
+    for (let i = 1; i <= 10; i++) {
+        const result = number * i;
+        table += `${number} × ${i} = ${result}<br>`;
+    }
+    
+    document.getElementById('tableResult').innerHTML = table;
+    document.getElementById('tableResult').className = 'alert alert-success';
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 2: Pattern Generator</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="patternSize" class="form-label">Pattern size:</label>
+                                        <input type="number" class="form-control" id="patternSize" placeholder="5" min="1" max="10">
+                                        <label for="patternChar" class="form-label">Pattern character:</label>
+                                        <input type="text" class="form-control" id="patternChar" placeholder="*" maxlength="1">
+                                        <button class="btn btn-warning mt-2" onclick="generatePattern()">Generate Pattern</button>
+                                    </div>
+                                    <div id="patternResult" class="alert alert-info d-none" style="font-family: monospace;"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function generatePattern() {
+    const size = parseInt(document.getElementById('patternSize').value);
+    const char = document.getElementById('patternChar').value || '*';
+    let pattern = '';
+    
+    for (let i = 1; i <= size; i++) {
+        for (let j = 1; j <= i; j++) {
+            pattern += char + ' ';
+        }
+        pattern += '<br>';
+    }
+    
+    document.getElementById('patternResult').innerHTML = pattern;
+    document.getElementById('patternResult').className = 'alert alert-success';
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 3: Array Processing</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="numberList" class="form-label">Enter numbers (comma-separated):</label>
+                                        <input type="text" class="form-control" id="numberList" placeholder="1, 2, 3, 4, 5">
+                                        <button class="btn btn-warning mt-2" onclick="processNumbers()">Process Numbers</button>
+                                    </div>
+                                    <div id="numbersResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">function processNumbers() {
+    const input = document.getElementById('numberList').value;
+    const numbers = input.split(',').map(n => parseInt(n.trim()));
+    
+    let sum = 0;
+    let evenCount = 0;
+    let oddCount = 0;
+    
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+        
+        if (numbers[i] % 2 === 0) {
+            evenCount++;
+        } else {
+            oddCount++;
+        }
+    }
+    
+    const average = sum / numbers.length;
+    const result = `
+        Numbers: ${numbers.join(', ')}<br>
+        Sum: ${sum}<br>
+        Average: ${average.toFixed(2)}<br>
+        Even numbers: ${evenCount}<br>
+        Odd numbers: ${oddCount}
+    `;
+    
+    document.getElementById('numbersResult').innerHTML = result;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: While Loops -->
+        <section id="while-loops" class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-redo"></i> While Loops</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 1: Number Guessing Game</h5>
+                                    <div class="demo-controls mb-3">
+                                        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+                                        <input type="number" class="form-control" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+                                        <button class="btn btn-danger mt-2" onclick="makeGuess()">Make Guess</button>
+                                        <button class="btn btn-secondary mt-2" onclick="resetGame()">New Game</button>
+                                    </div>
+                                    <div id="guessResult" class="alert alert-info d-none"></div>
+                                    <div id="gameStats" class="mt-2"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">let targetNumber = Math.floor(Math.random() * 100) + 1;
+let attempts = 0;
+let gameWon = false;
+
+function makeGuess() {
+    if (gameWon) return;
+    
+    const guess = parseInt(document.getElementById('guessInput').value);
+    attempts++;
+    
+    let message = '';
+    let alertClass = 'alert-info';
+    
+    if (guess === targetNumber) {
+        message = `🎉 Congratulations! You guessed it in ${attempts} attempts!`;
+        alertClass = 'alert-success';
+        gameWon = true;
+    } else if (guess < targetNumber) {
+        message = `📈 Too low! Try a higher number. (Attempt ${attempts})`;
+        alertClass = 'alert-warning';
+    } else {
+        message = `📉 Too high! Try a lower number. (Attempt ${attempts})`;
+        alertClass = 'alert-warning';
+    }
+    
+    document.getElementById('guessResult').textContent = message;
+    document.getElementById('guessResult').className = `alert ${alertClass}`;
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Example 2: Countdown Timer</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="countdownStart" class="form-label">Countdown from:</label>
+                                        <input type="number" class="form-control" id="countdownStart" placeholder="10" min="1" max="60">
+                                        <button class="btn btn-danger mt-2" onclick="startCountdown()">Start Countdown</button>
+                                        <button class="btn btn-secondary mt-2" onclick="stopCountdown()">Stop</button>
+                                    </div>
+                                    <div id="countdownResult" class="alert alert-info d-none"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre><code class="language-javascript">let countdownInterval;
+
+function startCountdown() {
+    let count = parseInt(document.getElementById('countdownStart').value);
+    
+    // Clear any existing countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
+    document.getElementById('countdownResult').className = 'alert alert-warning';
+    
+    countdownInterval = setInterval(() => {
+        if (count > 0) {
+            document.getElementById('countdownResult').innerHTML = 
+                `<h2>${count}</h2>`;
+            count--;
+        } else {
+            document.getElementById('countdownResult').innerHTML = 
+                '<h2>🚀 Time\'s up!</h2>';
+            document.getElementById('countdownResult').className = 'alert alert-success';
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice Exercise</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5>Challenge: FizzBuzz Generator</h5>
+                            <p>Create a FizzBuzz sequence. For numbers 1 to N:</p>
+                            <ul>
+                                <li>If divisible by 3, print "Fizz"</li>
+                                <li>If divisible by 5, print "Buzz"</li>
+                                <li>If divisible by both 3 and 5, print "FizzBuzz"</li>
+                                <li>Otherwise, print the number</li>
+                            </ul>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <label for="fizzBuzzLimit" class="form-label">Generate FizzBuzz up to:</label>
+                                        <input type="number" class="form-control" id="fizzBuzzLimit" placeholder="20" min="1" max="100">
+                                        <button class="btn btn-primary mt-2" onclick="generateFizzBuzz()">Generate FizzBuzz</button>
+                                    </div>
+                                    <div id="fizzBuzzResult" class="alert alert-info d-none" style="max-height: 300px; overflow-y: auto;"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Your turn! Try to write this yourself:</h5>
+                                    <pre><code class="language-javascript">function generateFizzBuzz() {
+    const limit = parseInt(document.getElementById('fizzBuzzLimit').value);
+    let result = '';
+    
+    for (let i = 1; i <= limit; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+            result += 'FizzBuzz';
+        } else if (i % 3 === 0) {
+            result += 'Fizz';
+        } else if (i % 5 === 0) {
+            result += 'Buzz';
+        } else {
+            result += i;
+        }
+        result += '<br>';
+    }
+    
+    document.getElementById('fizzBuzzResult').innerHTML = result;
+    document.getElementById('fizzBuzzResult').className = 'alert alert-success';
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Module Button -->
+        <div class="text-center">
+            <a href="/module/2" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 2
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-2.js"></script>
+</body>
+</html>

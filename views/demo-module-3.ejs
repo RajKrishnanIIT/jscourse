@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 3 Demo: Functions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/3">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/3">Module 3: Functions</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-cog"></i> Functions Demo</h1>
+            <p class="lead">Learn the three main ways to create functions in JavaScript</p>
+        </div>
+
+        <!-- Quick Test Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-play"></i> Quick Test</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info me-2" onclick="quickTest()">Test JavaScript</button>
+                        <span id="quickTestResult" class="ms-3"><em>Click the button to test JavaScript...</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Function Declaration -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-file-code"></i> 1. Function Declaration</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="userName" class="form-label">Enter your name:</label>
+                                        <input type="text" class="form-control mb-2" id="userName" placeholder="Your name">
+                                        <button class="btn btn-primary" onclick="runDeclarationDemo()">Run Function Declaration</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="declarationResult" class="border p-3 bg-light" style="min-height: 60px;">
+                                            <em class="text-muted">Click "Run Function Declaration" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Function Declaration
+function greetUser(name) {
+    return "Hello, " + name + "! Welcome!";
+}
+
+// Call the function
+console.log(greetUser("Alice"));</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Key Features:</strong>
+                                        <ul class="small">
+                                            <li>Hoisted (can be called before declaration)</li>
+                                            <li>Named function</li>
+                                            <li>Traditional syntax</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Function Expression -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-equals"></i> 2. Function Expression</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="num1" class="form-label">First number:</label>
+                                        <input type="number" class="form-control mb-2" id="num1" placeholder="5">
+                                        <label for="num2" class="form-label">Second number:</label>
+                                        <input type="number" class="form-control mb-2" id="num2" placeholder="3">
+                                        <button class="btn btn-success" onclick="runExpressionDemo()">Run Function Expression</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="expressionResult" class="border p-3 bg-light" style="min-height: 60px;">
+                                            <em class="text-muted">Click "Run Function Expression" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Function Expression
+const multiply = function(a, b) {
+    return a * b;
+};
+
+// Call the function
+console.log(multiply(5, 3));</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Key Features:</strong>
+                                        <ul class="small">
+                                            <li>Not hoisted (must declare before use)</li>
+                                            <li>Stored in a variable</li>
+                                            <li>Can be anonymous</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Arrow Function -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-arrow-right"></i> 3. Arrow Function</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="numbers" class="form-label">Enter numbers (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="numbers" placeholder="1, 2, 3, 4, 5">
+                                        <button class="btn btn-warning" onclick="runArrowDemo()">Run Arrow Function</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="arrowResult" class="border p-3 bg-light" style="min-height: 60px;">
+                                            <em class="text-muted">Click "Run Arrow Function" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Arrow Function
+const doubleNumbers = (arr) => {
+    return arr.map(num => num * 2);
+};
+
+// Shorter version
+const double = arr => arr.map(n => n * 2);
+
+// Call the function
+console.log(double([1, 2, 3, 4, 5]));</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Key Features:</strong>
+                                        <ul class="small">
+                                            <li>Shorter syntax</li>
+                                            <li>Implicit return for single expressions</li>
+                                            <li>Great for array methods</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Parameters Demo -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-sliders-h"></i> 4. Function Parameters</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It:</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="personName" class="form-label">Name:</label>
+                                        <input type="text" class="form-control mb-2" id="personName" placeholder="John">
+                                        <label for="personAge" class="form-label">Age (optional):</label>
+                                        <input type="number" class="form-control mb-2" id="personAge" placeholder="Leave empty">
+                                        <button class="btn btn-danger" onclick="runParametersDemo()">Test Parameters</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="parametersResult" class="border p-3 bg-light" style="min-height: 60px;">
+                                            <em class="text-muted">Click "Test Parameters" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Default Parameters
+function introduce(name, age = "unknown") {
+    return `Hi, I'm ${name} and I'm ${age} years old.`;
+}
+
+// Rest Parameters
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+// Examples
+console.log(introduce("John"));
+console.log(introduce("Alice", 25));
+console.log(sum(1, 2, 3, 4, 5));</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Parameter Types:</strong>
+                                        <ul class="small">
+                                            <li><strong>Default:</strong> age = "unknown"</li>
+                                            <li><strong>Rest:</strong> ...numbers</li>
+                                            <li><strong>Required:</strong> name</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-balance-scale"></i> Function Comparison</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Feature</th>
+                                            <th>Declaration</th>
+                                            <th>Expression</th>
+                                            <th>Arrow</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Syntax</strong></td>
+                                            <td><code>function name() {}</code></td>
+                                            <td><code>const name = function() {}</code></td>
+                                            <td><code>const name = () => {}</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Hoisting</strong></td>
+                                            <td>✅ Yes</td>
+                                            <td>❌ No</td>
+                                            <td>❌ No</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Conciseness</strong></td>
+                                            <td>Standard</td>
+                                            <td>Standard</td>
+                                            <td>✅ Shorter</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Best For</strong></td>
+                                            <td>Main functions</td>
+                                            <td>Conditional creation</td>
+                                            <td>Callbacks, array methods</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice: Simple Calculator</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Let's combine all three function types to create a simple calculator:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-4">
+                                                <input type="number" class="form-control" id="calcA" placeholder="10">
+                                            </div>
+                                            <div class="col-4">
+                                                <select class="form-select" id="calcOp">
+                                                    <option value="add">Add (+)</option>
+                                                    <option value="subtract">Subtract (-)</option>
+                                                    <option value="multiply">Multiply (×)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="number" class="form-control" id="calcB" placeholder="5">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-success" onclick="runCalculator()">Calculate</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="calculatorResult" class="border p-3 bg-light" style="min-height: 60px;">
+                                            <em class="text-muted">Click "Calculate" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Calculator Code:</h5>
+                                    <pre class="bg-light p-3 rounded small"><code>// Function Declaration
+function add(a, b) {
+    return a + b;
+}
+
+// Function Expression
+const subtract = function(a, b) {
+    return a - b;
+};
+
+// Arrow Function
+const multiply = (a, b) => a * b;
+
+// Usage
+console.log(add(10, 5));      // 15
+console.log(subtract(10, 5)); // 5  
+console.log(multiply(10, 5)); // 50</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="text-center mb-5">
+            <a href="/module/3" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 3
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-3-simple.js"></script>
+</body>
+</html>

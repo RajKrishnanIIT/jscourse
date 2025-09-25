@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 7 Demo: Modern JavaScript Features</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/7">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/7">Module 7: Modern JavaScript Features</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-rocket"></i> Modern JavaScript Features Demo</h1>
+            <p class="lead">Explore ES6+ features that make JavaScript more powerful and elegant</p>
+        </div>
+
+        <!-- Quick Test Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-play"></i> Quick Test</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info me-2" onclick="quickTest()">Test JavaScript</button>
+                        <span id="quickTestResult" class="ms-3"><em>Click the button to test JavaScript...</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Let/Const -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-lock"></i> 1. Let/Const</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Variable Declarations</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="varType" class="form-label">Variable Type:</label>
+                                        <select class="form-select mb-2" id="varType">
+                                            <option value="let">let (block-scoped, reassignable)</option>
+                                            <option value="const">const (block-scoped, immutable)</option>
+                                            <option value="var">var (function-scoped, legacy)</option>
+                                        </select>
+                                        
+                                        <label for="varName7" class="form-label">Variable Name:</label>
+                                        <input type="text" class="form-control mb-2" id="varName7" placeholder="myVariable">
+                                        
+                                        <label for="varValue7" class="form-label">Initial Value:</label>
+                                        <input type="text" class="form-control mb-2" id="varValue7" placeholder="Hello World">
+                                        
+                                        <button class="btn btn-primary me-2" onclick="runLetConstDemo()">Create Variable</button>
+                                        <button class="btn btn-warning me-2" onclick="testReassignment()">Test Reassignment</button>
+                                        <button class="btn btn-info me-2" onclick="testBlockScope()">Test Block Scope</button>
+                                        <button class="btn btn-secondary" onclick="clearLetConstLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="letConstResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Create Variable" to see variable behavior...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// ES6 Variable Declarations
+
+// let - block scoped, can be reassigned
+let userName = "Alice";
+userName = "Bob"; // OK
+
+if (true) {
+    let blockVar = "I'm block-scoped";
+    console.log(blockVar); // OK
+}
+// console.log(blockVar); // ReferenceError
+
+// const - block scoped, cannot be reassigned
+const API_URL = "https://api.example.com";
+// API_URL = "new url"; // TypeError
+
+// const with objects/arrays (content can change)
+const user = { name: "Alice" };
+user.name = "Bob"; // OK - object content can change
+user.age = 25;     // OK - can add properties
+
+// var - function scoped (avoid in modern JS)
+var oldStyle = "function-scoped";
+if (true) {
+    var oldStyle = "redeclared"; // Hoisted
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Key Differences:</strong>
+                                        <ul class="small">
+                                            <li><strong>let:</strong> Block-scoped, reassignable</li>
+                                            <li><strong>const:</strong> Block-scoped, immutable binding</li>
+                                            <li><strong>var:</strong> Function-scoped, hoisted</li>
+                                            <li>Use <code>const</code> by default, <code>let</code> when reassignment needed</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Template Literals -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-quote-left"></i> 2. Template Literals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: String Templates</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="firstName" class="form-label">First Name:</label>
+                                        <input type="text" class="form-control mb-2" id="firstName" placeholder="John">
+                                        
+                                        <label for="lastName" class="form-label">Last Name:</label>
+                                        <input type="text" class="form-control mb-2" id="lastName" placeholder="Doe">
+                                        
+                                        <label for="userAge" class="form-label">Age:</label>
+                                        <input type="number" class="form-control mb-2" id="userAge" placeholder="25">
+                                        
+                                        <label for="templateType" class="form-label">Template Type:</label>
+                                        <select class="form-select mb-2" id="templateType">
+                                            <option value="simple">Simple Interpolation</option>
+                                            <option value="expression">With Expressions</option>
+                                            <option value="multiline">Multiline</option>
+                                            <option value="tagged">Tagged Template</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-success me-2" onclick="runTemplateLiteralsDemo()">Generate Template</button>
+                                        <button class="btn btn-warning me-2" onclick="compareWithConcat()">Compare vs Concat</button>
+                                        <button class="btn btn-secondary" onclick="clearTemplateLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="templateResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Generate Template" to see template literals in action...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Template Literals (ES6)
+
+const firstName = "John";
+const lastName = "Doe";
+const age = 25;
+
+// Basic interpolation with ${}
+const greeting = `Hello, ${firstName} ${lastName}!`;
+
+// Expressions in templates
+const message = `You will be ${age + 1} next year`;
+
+// Multiline strings (no \n needed)
+const multiline = `
+    Line 1
+    Line 2
+    Line 3
+`;
+
+// Comparison with old concatenation
+const oldWay = "Hello, " + firstName + " " + lastName + "!";
+const newWay = `Hello, ${firstName} ${lastName}!`;
+
+// Tagged templates (advanced)
+function highlight(strings, ...values) {
+    return strings.reduce((result, string, i) => {
+        const value = values[i] ? `<mark>${values[i]}</mark>` : '';
+        return result + string + value;
+    }, '');
+}
+
+const tagged = highlight`Hello, ${firstName}!`;</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Template Literal Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Variable interpolation with <code>${}</code></li>
+                                            <li>Multiline strings without escaping</li>
+                                            <li>Expression evaluation</li>
+                                            <li>Tagged templates for advanced processing</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Spread Operator -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-expand-arrows-alt"></i> 3. Spread Operator</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Spread Operations</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="array1" class="form-label">Array 1 (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="array1" placeholder="1, 2, 3">
+                                        
+                                        <label for="array2" class="form-label">Array 2 (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="array2" placeholder="4, 5, 6">
+                                        
+                                        <label for="objectProps" class="form-label">Object Properties (key:value, separated by comma):</label>
+                                        <input type="text" class="form-control mb-2" id="objectProps" placeholder="name:John, age:25">
+                                        
+                                        <button class="btn btn-warning me-2" onclick="runSpreadArrayDemo()">Array Spread</button>
+                                        <button class="btn btn-info me-2" onclick="runSpreadObjectDemo()">Object Spread</button>
+                                        <button class="btn btn-success me-2" onclick="runSpreadFunctionDemo()">Function Spread</button>
+                                        <button class="btn btn-secondary" onclick="clearSpreadLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="spreadResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Array Spread" to see spread operator in action...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Spread Operator (...) ES6
+
+// Array spreading
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+// Combine arrays
+const combined = [...arr1, ...arr2];
+// Result: [1, 2, 3, 4, 5, 6]
+
+// Copy array (shallow)
+const copy = [...arr1];
+
+// Add elements while spreading
+const extended = [0, ...arr1, 7];
+
+// Object spreading
+const obj1 = { name: "John", age: 25 };
+const obj2 = { city: "NYC", age: 26 };
+
+// Combine objects (later properties override)
+const merged = { ...obj1, ...obj2 };
+// Result: { name: "John", age: 26, city: "NYC" }
+
+// Function arguments spreading
+const numbers = [1, 2, 3, 4, 5];
+const max = Math.max(...numbers);
+
+// Rest parameters (opposite of spread)
+function sum(...numbers) {
+    return numbers.reduce((a, b) => a + b, 0);
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Spread Operator Uses:</strong>
+                                        <ul class="small">
+                                            <li>Combine/copy arrays and objects</li>
+                                            <li>Function argument spreading</li>
+                                            <li>Convert iterables to arrays</li>
+                                            <li>Clone objects (shallow copy)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: ES6 Modules -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-puzzle-piece"></i> 4. ES6 Modules</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Module Simulation</h5>
+                                    <div class="demo-controls mb-3">
+                                        <p class="text-muted small">Note: Real modules require a server environment. This demo simulates module behavior.</p>
+                                        
+                                        <label for="moduleType" class="form-label">Module Type:</label>
+                                        <select class="form-select mb-2" id="moduleType">
+                                            <option value="math">Math Utilities</option>
+                                            <option value="user">User Management</option>
+                                            <option value="api">API Helpers</option>
+                                            <option value="validation">Form Validation</option>
+                                        </select>
+                                        
+                                        <label for="importType" class="form-label">Import Style:</label>
+                                        <select class="form-select mb-2" id="importType">
+                                            <option value="named">Named Import</option>
+                                            <option value="default">Default Import</option>
+                                            <option value="namespace">Namespace Import</option>
+                                            <option value="mixed">Mixed Import</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-danger me-2" onclick="simulateModuleImport()">Simulate Import</button>
+                                        <button class="btn btn-warning me-2" onclick="simulateModuleExport()">Show Export</button>
+                                        <button class="btn btn-info me-2" onclick="showModuleStructure()">Module Structure</button>
+                                        <button class="btn btn-secondary" onclick="clearModuleLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="moduleResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Simulate Import" to see module behavior...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// ES6 Modules
+
+// --- math.js (Export file) ---
+// Named exports
+export const PI = 3.14159;
+export const E = 2.71828;
+
+export function add(a, b) {
+    return a + b;
+}
+
+export function multiply(a, b) {
+    return a * b;
+}
+
+// Default export
+export default function calculate(operation, a, b) {
+    switch(operation) {
+        case 'add': return add(a, b);
+        case 'multiply': return multiply(a, b);
+    }
+}
+
+// --- main.js (Import file) ---
+// Named imports
+import { add, multiply, PI } from './math.js';
+
+// Default import
+import calculate from './math.js';
+
+// Namespace import
+import * as MathUtils from './math.js';
+
+// Mixed import
+import calc, { add as sum } from './math.js';
+
+// Usage
+console.log(add(2, 3));           // 5
+console.log(MathUtils.PI);        // 3.14159</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Module Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Code organization and reusability</li>
+                                            <li>Explicit dependencies</li>
+                                            <li>Tree shaking (dead code elimination)</li>
+                                            <li>Namespace management</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice: Modern JS Todo Manager</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Build a todo manager using all modern JavaScript features:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3">
+                                            <label for="todoTitle" class="form-label">Todo Title:</label>
+                                            <input type="text" class="form-control mb-2" id="todoTitle" placeholder="Learn JavaScript">
+                                            
+                                            <label for="todoCategory" class="form-label">Category:</label>
+                                            <input type="text" class="form-control mb-2" id="todoCategory" placeholder="Study">
+                                            
+                                            <label for="todoPriority" class="form-label">Priority:</label>
+                                            <select class="form-select mb-2" id="todoPriority">
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <button class="btn btn-success me-2" onclick="addModernTodo()">Add Todo</button>
+                                        <button class="btn btn-info me-2" onclick="filterTodos()">Filter High Priority</button>
+                                        <button class="btn btn-warning me-2" onclick="exportTodos()">Export Data</button>
+                                        <button class="btn btn-secondary" onclick="clearModernTodos()">Clear All</button>
+                                    </div>
+                                    
+                                    <!-- Todo Display -->
+                                    <div class="mt-3">
+                                        <h6>📋 Modern Todo List:</h6>
+                                        <div id="modernTodoDisplay" class="border rounded p-3 bg-light" style="min-height: 200px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">No todos yet. Add some using modern JavaScript features!</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Modern JS Features Used:</h5>
+                                    <pre class="bg-light p-3 rounded small"><code>// Modern Todo Manager Implementation
+
+class ModernTodoManager {
+    constructor() {
+        // Private fields (ES2022)
+        this.#todos = [];
+        this.#nextId = 1;
+    }
+    
+    // Method using template literals & spread
+    addTodo(title, category, priority = 'medium') {
+        const newTodo = {
+            id: this.#nextId++,
+            title,
+            category,
+            priority,
+            completed: false,
+            createdAt: new Date().toISOString()
+        };
+        
+        // Spread to create new array
+        this.#todos = [...this.#todos, newTodo];
+        
+        // Template literal for message
+        const message = `Added "${title}" with ${priority} priority`;
+        this.#logAction(message);
+        
+        return newTodo;
+    }
+    
+    // Destructuring & arrow functions
+    filterByPriority(priority) {
+        return this.#todos.filter(({ priority: p }) => p === priority);
+    }
+    
+    // Rest parameters & spread
+    exportData(...fields) {
+        const exported = this.#todos.map(todo => {
+            const filtered = {};
+            for (const field of fields) {
+                filtered[field] = todo[field];
+            }
+            return filtered;
+        });
+        return JSON.stringify(exported, null, 2);
+    }
+}</code></pre>
+                                    
+                                    <!-- Stats Display -->
+                                    <div class="mt-3">
+                                        <h6>📊 Todo Statistics:</h6>
+                                        <div id="modernTodoStats" class="border p-3 bg-light" style="min-height: 120px;">
+                                            <em class="text-muted">Todo statistics will appear here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="text-center mb-5">
+            <a href="/module/7" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 7
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-7.js"></script>
+</body>
+</html>

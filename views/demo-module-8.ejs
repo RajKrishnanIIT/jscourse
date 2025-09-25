@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Error Handling and Debugging - Interactive Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/module/8">
+                    <i class="fas fa-arrow-left"></i> Back to Module 8
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-primary">
+                <i class="fas fa-exclamation-triangle"></i> Module 8: Error Handling and Debugging
+            </h1>
+            <p class="lead">Interactive demonstrations of JavaScript error handling and debugging techniques</p>
+            <div class="alert alert-info">
+                <strong>💡 Tip:</strong> Open your browser's Developer Console (F12) to see detailed error information and debugging output!
+            </div>
+        </div>
+
+        <!-- Quick Test -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h3><i class="fas fa-play-circle"></i> Quick Test</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <p>Test that the demo is working properly</p>
+                            <button class="btn btn-info btn-lg" onclick="quickTest()">
+                                <i class="fas fa-play"></i> Run Quick Test
+                            </button>
+                            <div id="quickTestResult" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Try/Catch/Finally -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-shield-alt"></i> 1. Try/Catch/Finally</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Error Handling</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="errorType" class="form-label">Error Type to Simulate:</label>
+                                        <select class="form-select mb-2" id="errorType">
+                                            <option value="reference">ReferenceError (undefined variable)</option>
+                                            <option value="type">TypeError (wrong type)</option>
+                                            <option value="syntax">SyntaxError (JSON parse)</option>
+                                            <option value="range">RangeError (invalid array length)</option>
+                                            <option value="custom">Custom Error</option>
+                                        </select>
+                                        
+                                        <label for="customMessage" class="form-label">Custom Error Message:</label>
+                                        <input type="text" class="form-control mb-2" id="customMessage" placeholder="Something went wrong!">
+                                        
+                                        <button class="btn btn-danger me-2" onclick="runTryCatchDemo()">Test Error Handling</button>
+                                        <button class="btn btn-warning me-2" onclick="demonstrateFinally()">Show Finally Block</button>
+                                        <button class="btn btn-secondary" onclick="clearTryCatchLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="tryCatchResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Test Error Handling" to see try/catch in action...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Try/Catch/Finally Structure
+
+try {
+    // Code that might throw an error
+    let result = someRiskyOperation();
+    console.log(result);
+} catch (error) {
+    // Handle the error gracefully
+    console.error('Caught error:', error.message);
+    console.error('Error type:', error.name);
+} finally {
+    // Always runs (cleanup code)
+    console.log('Cleanup completed');
+}
+
+// Common Error Types:
+// - ReferenceError: Variable not defined
+// - TypeError: Wrong data type
+// - SyntaxError: Invalid syntax
+// - RangeError: Value out of range
+// - Custom: throw new Error('message')</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Error Handling Best Practices:</strong>
+                                        <ul class="small">
+                                            <li>Always catch specific error types when possible</li>
+                                            <li>Provide meaningful error messages to users</li>
+                                            <li>Use finally for cleanup operations</li>
+                                            <li>Don't ignore errors - handle or log them</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Error Types -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-bug"></i> 2. Error Types</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Error Type Explorer</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="errorCategory" class="form-label">Error Category:</label>
+                                        <select class="form-select mb-2" id="errorCategory">
+                                            <option value="runtime">Runtime Errors</option>
+                                            <option value="logic">Logic Errors</option>
+                                            <option value="async">Async Errors</option>
+                                        </select>
+                                        
+                                        <label for="inputValue" class="form-label">Test Input (for demonstrations):</label>
+                                        <input type="text" class="form-control mb-2" id="inputValue" placeholder="test value">
+                                        
+                                        <button class="btn btn-warning me-2" onclick="runErrorTypesDemo()">Explore Error Types</button>
+                                        <button class="btn btn-info me-2" onclick="showErrorProperties()">Show Error Properties</button>
+                                        <button class="btn btn-secondary" onclick="clearErrorTypesLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="errorTypesResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Explore Error Types" to see different error types...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Common JavaScript Error Types
+
+// 1. ReferenceError
+try {
+    console.log(undefinedVariable);
+} catch (error) {
+    console.log(error.name); // "ReferenceError"
+}
+
+// 2. TypeError  
+try {
+    null.someMethod();
+} catch (error) {
+    console.log(error.name); // "TypeError"
+}
+
+// 3. SyntaxError (runtime JSON parsing)
+try {
+    JSON.parse('invalid json');
+} catch (error) {
+    console.log(error.name); // "SyntaxError"
+}
+
+// 4. RangeError
+try {
+    new Array(-1);
+} catch (error) {
+    console.log(error.name); // "RangeError"
+}
+
+// 5. Custom Errors
+throw new Error('Custom error message');</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Error Object Properties:</strong>
+                                        <ul class="small">
+                                            <li><strong>name:</strong> Error type (e.g., "TypeError")</li>
+                                            <li><strong>message:</strong> Error description</li>
+                                            <li><strong>stack:</strong> Call stack trace</li>
+                                            <li><strong>fileName:</strong> File where error occurred</li>
+                                            <li><strong>lineNumber:</strong> Line number of error</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Debugging Tools -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-search"></i> 3. Debugging Tools</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Debugging Techniques</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="debugMethod" class="form-label">Debugging Method:</label>
+                                        <select class="form-select mb-2" id="debugMethod">
+                                            <option value="console">Console Methods</option>
+                                            <option value="breakpoints">Breakpoint Simulation</option>
+                                            <option value="trace">Stack Trace</option>
+                                            <option value="performance">Performance Debugging</option>
+                                        </select>
+                                        
+                                        <label for="debugInput" class="form-label">Debug Data (JSON object):</label>
+                                        <textarea class="form-control mb-2" id="debugInput" rows="3" placeholder='{"name": "John", "age": 25}'></textarea>
+                                        
+                                        <button class="btn btn-success me-2" onclick="runDebuggingDemo()">Run Debugging Demo</button>
+                                        <button class="btn btn-info me-2" onclick="showConsoleAPI()">Console API Guide</button>
+                                        <button class="btn btn-secondary" onclick="clearDebuggingLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="debuggingResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Run Debugging Demo" to see debugging techniques...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Console Debugging Methods
+
+// Basic logging
+console.log('Debug info:', variable);
+console.info('Information message');
+console.warn('Warning message');
+console.error('Error message');
+
+// Object inspection
+console.table(arrayOrObject);
+console.dir(domElement);
+
+// Grouping logs
+console.group('Function Execution');
+console.log('Step 1 completed');
+console.log('Step 2 completed');
+console.groupEnd();
+
+// Performance debugging
+console.time('operation');
+// ... code to measure
+console.timeEnd('operation');
+
+// Stack trace
+console.trace('Execution path');
+
+// Conditional logging
+console.assert(condition, 'Error message if false');
+
+// Debugging breakpoints (DevTools)
+debugger; // Pauses execution in DevTools</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Browser DevTools Features:</strong>
+                                        <ul class="small">
+                                            <li>Sources tab: Set breakpoints and step through code</li>
+                                            <li>Console: Execute JavaScript and view logs</li>
+                                            <li>Network: Monitor API calls and resource loading</li>
+                                            <li>Performance: Profile code execution</li>
+                                            <li>Application: Inspect local storage and cookies</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Async Error Handling -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h3><i class="fas fa-clock"></i> 4. Async Error Handling</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Async/Await Error Handling</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="asyncScenario" class="form-label">Async Scenario:</label>
+                                        <select class="form-select mb-2" id="asyncScenario">
+                                            <option value="fetch">Fetch API Error</option>
+                                            <option value="timeout">Promise Timeout</option>
+                                            <option value="chain">Promise Chain Error</option>
+                                            <option value="parallel">Parallel Promise Errors</option>
+                                        </select>
+                                        
+                                        <label for="apiUrl" class="form-label">Test URL (for fetch demo):</label>
+                                        <input type="text" class="form-control mb-2" id="apiUrl" placeholder="https://httpstat.us/404">
+                                        
+                                        <button class="btn btn-info me-2" onclick="runAsyncErrorDemo()">Test Async Errors</button>
+                                        <button class="btn btn-warning me-2" onclick="showPromisePatterns()">Promise Patterns</button>
+                                        <button class="btn btn-secondary" onclick="clearAsyncLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="asyncResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Test Async Errors" to see async error handling...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Async/Await Error Handling
+
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Fetch failed:', error.message);
+        throw error; // Re-throw if needed
+    }
+}
+
+// Promise Chain Error Handling
+fetch(url)
+    .then(response => {
+        if (!response.ok) throw new Error('Network error');
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Chain error:', error))
+    .finally(() => console.log('Request completed'));
+
+// Promise.all Error Handling
+Promise.all([promise1, promise2, promise3])
+    .then(results => console.log('All succeeded:', results))
+    .catch(error => console.error('One failed:', error));</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Async Error Handling Tips:</strong>
+                                        <ul class="small">
+                                            <li>Always wrap async operations in try/catch</li>
+                                            <li>Handle both network and parsing errors</li>
+                                            <li>Use Promise.allSettled() for partial failures</li>
+                                            <li>Implement proper error boundaries in apps</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Error Handling Best Practices -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-star"></i> 5. Best Practices Showcase</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Error Handling Patterns</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="patternType" class="form-label">Pattern to Demonstrate:</label>
+                                        <select class="form-select mb-2" id="patternType">
+                                            <option value="validation">Input Validation</option>
+                                            <option value="fallback">Fallback Values</option>
+                                            <option value="retry">Retry Logic</option>
+                                            <option value="logging">Error Logging</option>
+                                        </select>
+                                        
+                                        <label for="testData" class="form-label">Test Data:</label>
+                                        <input type="text" class="form-control mb-2" id="testData" placeholder="Enter test data...">
+                                        
+                                        <button class="btn btn-primary me-2" onclick="runBestPracticesDemo()">Show Best Practices</button>
+                                        <button class="btn btn-success me-2" onclick="runErrorHandlingQuiz()">Quick Quiz</button>
+                                        <button class="btn btn-secondary" onclick="clearBestPracticesLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="bestPracticesResult" class="border p-3 bg-light" style="min-height: 200px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Show Best Practices" to see error handling patterns...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Error Handling Best Practices
+
+// 1. Input Validation
+function validateEmail(email) {
+    try {
+        if (!email || typeof email !== 'string') {
+            throw new TypeError('Email must be a string');
+        }
+        
+        if (!email.includes('@')) {
+            throw new Error('Invalid email format');
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Validation failed:', error.message);
+        return false;
+    }
+}
+
+// 2. Fallback Values
+function getUserData(userId) {
+    try {
+        return fetchUserData(userId);
+    } catch (error) {
+        console.warn('Using default user data:', error.message);
+        return { id: userId, name: 'Unknown User' };
+    }
+}
+
+// 3. Retry Logic
+async function withRetry(fn, maxRetries = 3) {
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            return await fn();
+        } catch (error) {
+            if (i === maxRetries - 1) throw error;
+            await delay(1000 * i); // Exponential backoff
+        }
+    }
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Golden Rules:</strong>
+                                        <ul class="small">
+                                            <li>🛡️ Validate inputs at boundaries</li>
+                                            <li>🔄 Provide graceful degradation</li>
+                                            <li>📝 Log errors with context</li>
+                                            <li>👤 Show user-friendly messages</li>
+                                            <li>🔄 Implement retry for transient failures</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Module Button -->
+        <div class="text-center mb-5">
+            <a href="/module/8" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 8
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-8.js"></script>
+</body>
+</html>

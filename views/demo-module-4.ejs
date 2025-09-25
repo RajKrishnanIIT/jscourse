@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 4 Demo: Objects and Arrays</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/4">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/4">Module 4: Objects and Arrays</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-cubes"></i> Objects and Arrays Demo</h1>
+            <p class="lead">Learn to work with JavaScript's most powerful data structures</p>
+        </div>
+
+        <!-- Quick Test Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-play"></i> Quick Test</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info me-2" onclick="quickTest()">Test JavaScript</button>
+                        <span id="quickTestResult" class="ms-3"><em>Click the button to test JavaScript...</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Object Literals -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-box"></i> 1. Object Literals</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Create a Person Object</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="personName" class="form-label">Name:</label>
+                                        <input type="text" class="form-control mb-2" id="personName" placeholder="John Doe">
+                                        
+                                        <label for="personAge" class="form-label">Age:</label>
+                                        <input type="number" class="form-control mb-2" id="personAge" placeholder="25">
+                                        
+                                        <label for="personJob" class="form-label">Job:</label>
+                                        <input type="text" class="form-control mb-2" id="personJob" placeholder="Developer">
+                                        
+                                        <label for="personCity" class="form-label">City:</label>
+                                        <input type="text" class="form-control mb-2" id="personCity" placeholder="New York">
+                                        
+                                        <button class="btn btn-primary" onclick="runObjectDemo()">Create Object</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="objectResult" class="border p-3 bg-light" style="min-height: 100px;">
+                                            <em class="text-muted">Click "Create Object" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Object Literal
+const person = {
+    name: "John Doe",
+    age: 25,
+    job: "Developer",
+    city: "New York",
+    
+    // Method inside object
+    introduce: function() {
+        return `Hi, I'm ${this.name}`;
+    }
+};
+
+// Access properties
+console.log(person.name);
+console.log(person["age"]);
+console.log(person.introduce());</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Key Concepts:</strong>
+                                        <ul class="small">
+                                            <li>Properties with dot notation: <code>person.name</code></li>
+                                            <li>Properties with brackets: <code>person["age"]</code></li>
+                                            <li>Methods are functions inside objects</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Array Methods -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-list"></i> 2. Array Methods</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Array Operations</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="arrayInput" class="form-label">Enter numbers (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="arrayInput" placeholder="1, 2, 3, 4, 5">
+                                        
+                                        <label for="arrayOperation" class="form-label">Choose Operation:</label>
+                                        <select class="form-select mb-2" id="arrayOperation">
+                                            <option value="map">Map (double each number)</option>
+                                            <option value="filter">Filter (even numbers only)</option>
+                                            <option value="reduce">Reduce (sum all numbers)</option>
+                                            <option value="find">Find (first number > 3)</option>
+                                            <option value="sort">Sort (ascending order)</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-success" onclick="runArrayDemo()">Run Array Method</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="arrayResult" class="border p-3 bg-light" style="min-height: 100px;">
+                                            <em class="text-muted">Click "Run Array Method" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Array Methods
+const numbers = [1, 2, 3, 4, 5];
+
+// Map - transform each element
+const doubled = numbers.map(n => n * 2);
+// Result: [2, 4, 6, 8, 10]
+
+// Filter - keep elements that pass test
+const evens = numbers.filter(n => n % 2 === 0);
+// Result: [2, 4]
+
+// Reduce - accumulate to single value
+const sum = numbers.reduce((total, n) => total + n, 0);
+// Result: 15
+
+// Find - first element that matches
+const found = numbers.find(n => n > 3);
+// Result: 4</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Array Methods:</strong>
+                                        <ul class="small">
+                                            <li><strong>map():</strong> Transform each element</li>
+                                            <li><strong>filter():</strong> Keep matching elements</li>
+                                            <li><strong>reduce():</strong> Accumulate to single value</li>
+                                            <li><strong>find():</strong> First matching element</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Object Methods -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-cog"></i> 3. Object Methods</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Student Grade Calculator</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="studentName" class="form-label">Student Name:</label>
+                                        <input type="text" class="form-control mb-2" id="studentName" placeholder="Alice Johnson">
+                                        
+                                        <label for="grades" class="form-label">Grades (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="grades" placeholder="85, 92, 78, 95">
+                                        
+                                        <button class="btn btn-warning" onclick="runObjectMethodDemo()">Calculate Grades</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="objectMethodResult" class="border p-3 bg-light" style="min-height: 100px;">
+                                            <em class="text-muted">Click "Calculate Grades" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Object with Methods
+const student = {
+    name: "Alice Johnson",
+    grades: [85, 92, 78, 95],
+    
+    // Method to calculate average
+    getAverage: function() {
+        const sum = this.grades.reduce((total, grade) => 
+            total + grade, 0);
+        return sum / this.grades.length;
+    },
+    
+    // Method to get letter grade
+    getLetterGrade: function() {
+        const avg = this.getAverage();
+        if (avg >= 90) return 'A';
+        if (avg >= 80) return 'B';
+        if (avg >= 70) return 'C';
+        return 'F';
+    },
+    
+    // Method to get report
+    getReport: function() {
+        return `${this.name}: ${this.getLetterGrade()}`;
+    }
+};</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Object Methods:</strong>
+                                        <ul class="small">
+                                            <li><code>this</code> refers to the object</li>
+                                            <li>Methods can call other methods</li>
+                                            <li>Encapsulate related data and behavior</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Destructuring -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-expand-arrows-alt"></i> 4. Destructuring</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Extract Data</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="userEmail" class="form-label">Email:</label>
+                                        <input type="email" class="form-control mb-2" id="userEmail" placeholder="john@example.com">
+                                        
+                                        <label for="userPhone" class="form-label">Phone:</label>
+                                        <input type="text" class="form-control mb-2" id="userPhone" placeholder="555-0123">
+                                        
+                                        <label for="colors" class="form-label">Favorite Colors (comma-separated):</label>
+                                        <input type="text" class="form-control mb-2" id="colors" placeholder="red, blue, green">
+                                        
+                                        <button class="btn btn-danger" onclick="runDestructuringDemo()">Destructure Data</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="destructuringResult" class="border p-3 bg-light" style="min-height: 100px;">
+                                            <em class="text-muted">Click "Destructure Data" to see the output here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Object Destructuring
+const user = {
+    email: "john@example.com",
+    phone: "555-0123",
+    colors: ["red", "blue", "green"]
+};
+
+// Extract properties
+const { email, phone } = user;
+console.log(email);  // "john@example.com"
+console.log(phone);  // "555-0123"
+
+// Array Destructuring
+const [first, second, third] = user.colors;
+console.log(first);  // "red"
+console.log(second); // "blue"
+
+// With default values
+const { name = "Unknown" } = user;
+console.log(name);   // "Unknown"</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Destructuring Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Extract multiple values at once</li>
+                                            <li>Cleaner than dot notation</li>
+                                            <li>Works with arrays and objects</li>
+                                            <li>Supports default values</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice: Shopping Cart</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Build a shopping cart that uses objects and arrays together:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <div class="mb-3">
+                                            <h6>Add Items to Cart:</h6>
+                                            <div class="row g-2 mb-2">
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" id="itemName" placeholder="Product name">
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="number" class="form-control" id="itemPrice" placeholder="Price" step="0.01">
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="number" class="form-control" id="itemQty" placeholder="Qty" min="1">
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-success me-2" onclick="addToCart()">Add to Cart</button>
+                                            <button class="btn btn-info me-2" onclick="showCartSummary()">Show Summary</button>
+                                            <button class="btn btn-secondary" onclick="clearCart()">Clear Cart</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Output:</h6>
+                                        <div id="cartResult" class="border p-3 bg-light" style="min-height: 150px;">
+                                            <em class="text-muted">Add items to see the shopping cart here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Shopping Cart Code:</h5>
+                                    <pre class="bg-light p-3 rounded small"><code>// Shopping Cart Object
+const shoppingCart = {
+    items: [],
+    
+    addItem: function(name, price, quantity) {
+        this.items.push({
+            name: name,
+            price: price,
+            quantity: quantity,
+            total: price * quantity
+        });
+    },
+    
+    getTotal: function() {
+        return this.items.reduce((sum, item) => 
+            sum + item.total, 0);
+    },
+    
+    getItemCount: function() {
+        return this.items.reduce((sum, item) => 
+            sum + item.quantity, 0);
+    },
+    
+    clear: function() {
+        this.items = [];
+    }
+};</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="text-center mb-5">
+            <a href="/module/4" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 4
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-4.js"></script>
+</body>
+</html>

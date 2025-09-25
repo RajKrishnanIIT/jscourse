@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Learning Platform - Module 6 Demo: Asynchronous JavaScript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-code"></i> JavaScript Learning Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/module/6">Back to Module</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/module/6">Module 6: Asynchronous JavaScript</a></li>
+                        <li class="breadcrumb-item active">Interactive Demo</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="demo-header text-center mb-5">
+            <h1 class="display-4"><i class="fas fa-clock"></i> Asynchronous JavaScript Demo</h1>
+            <p class="lead">Master callbacks, promises, async/await, and API calls</p>
+        </div>
+
+        <!-- Quick Test Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-play"></i> Quick Test</h5>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info me-2" onclick="quickTest()">Test JavaScript</button>
+                        <span id="quickTestResult" class="ms-3"><em>Click the button to test JavaScript...</em></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Callbacks -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h3><i class="fas fa-phone"></i> 1. Callbacks</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Callback Functions</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="callbackDelay" class="form-label">Delay (seconds):</label>
+                                        <input type="number" class="form-control mb-2" id="callbackDelay" placeholder="3" min="1" max="10" value="3">
+                                        
+                                        <label for="callbackMessage" class="form-label">Message:</label>
+                                        <input type="text" class="form-control mb-2" id="callbackMessage" placeholder="Hello from callback!">
+                                        
+                                        <button class="btn btn-primary me-2" onclick="runCallbackDemo()">Run Callback</button>
+                                        <button class="btn btn-warning me-2" onclick="runCallbackHellDemo()">Callback Hell</button>
+                                        <button class="btn btn-secondary" onclick="clearCallbackLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Callback Output:</h6>
+                                        <div id="callbackResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Run Callback" to see asynchronous execution...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Callback Function Example
+function processWithCallback(message, delay, callback) {
+    console.log('Starting process...');
+    
+    setTimeout(() => {
+        console.log('Process complete!');
+        callback(message);
+    }, delay * 1000);
+}
+
+// Usage
+processWithCallback('Hello!', 3, function(result) {
+    console.log('Callback received:', result);
+});
+
+// Callback Hell Example
+getData(function(a) {
+    getMoreData(a, function(b) {
+        getEvenMoreData(b, function(c) {
+            // This nesting gets messy quickly!
+            console.log('Final result:', c);
+        });
+    });
+});</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Callback Concepts:</strong>
+                                        <ul class="small">
+                                            <li>Functions passed as arguments</li>
+                                            <li>Executed after async operation</li>
+                                            <li>Can lead to "callback hell"</li>
+                                            <li>Hard to handle errors</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Promises -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-handshake"></i> 2. Promises</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Promise Examples</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="promiseDelay" class="form-label">Delay (seconds):</label>
+                                        <input type="number" class="form-control mb-2" id="promiseDelay" placeholder="2" min="1" max="10" value="2">
+                                        
+                                        <label for="promiseSuccess" class="form-label">Outcome:</label>
+                                        <select class="form-select mb-2" id="promiseSuccess">
+                                            <option value="true">Success (Resolve)</option>
+                                            <option value="false">Failure (Reject)</option>
+                                            <option value="random">Random</option>
+                                        </select>
+                                        
+                                        <button class="btn btn-success me-2" onclick="runPromiseDemo()">Run Promise</button>
+                                        <button class="btn btn-info me-2" onclick="runPromiseChainDemo()">Promise Chain</button>
+                                        <button class="btn btn-warning me-2" onclick="runPromiseAllDemo()">Promise.all</button>
+                                        <button class="btn btn-secondary" onclick="clearPromiseLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Promise Output:</h6>
+                                        <div id="promiseResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Run Promise" to see promise execution...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Creating a Promise
+function createPromise(delay, shouldResolve) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (shouldResolve) {
+                resolve('Promise resolved successfully!');
+            } else {
+                reject(new Error('Promise rejected'));
+            }
+        }, delay * 1000);
+    });
+}
+
+// Using Promises
+createPromise(2, true)
+    .then(result => {
+        console.log('Success:', result);
+        return 'Next step';
+    })
+    .then(nextResult => {
+        console.log('Chained:', nextResult);
+    })
+    .catch(error => {
+        console.error('Error:', error.message);
+    })
+    .finally(() => {
+        console.log('Promise completed');
+    });</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Promise Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Avoids callback hell</li>
+                                            <li>Better error handling with .catch()</li>
+                                            <li>Chainable with .then()</li>
+                                            <li>Three states: pending, fulfilled, rejected</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Async/Await -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h3><i class="fas fa-hourglass-half"></i> 3. Async/Await</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: Async Functions</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="asyncSteps" class="form-label">Number of steps:</label>
+                                        <input type="number" class="form-control mb-2" id="asyncSteps" placeholder="3" min="1" max="5" value="3">
+                                        
+                                        <label for="stepDelay" class="form-label">Delay per step (seconds):</label>
+                                        <input type="number" class="form-control mb-2" id="stepDelay" placeholder="1" min="0.5" max="3" step="0.5" value="1">
+                                        
+                                        <button class="btn btn-warning me-2" onclick="runAsyncAwaitDemo()">Run Async/Await</button>
+                                        <button class="btn btn-info me-2" onclick="runAsyncErrorDemo()">Error Handling</button>
+                                        <button class="btn btn-success me-2" onclick="runParallelAsyncDemo()">Parallel Execution</button>
+                                        <button class="btn btn-secondary" onclick="clearAsyncLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Async/Await Output:</h6>
+                                        <div id="asyncResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Run Async/Await" to see synchronous-looking async code...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Async/Await Function
+async function processSteps(numSteps, delay) {
+    try {
+        console.log('Starting async process...');
+        
+        for (let i = 1; i <= numSteps; i++) {
+            console.log(`Step ${i} starting...`);
+            
+            // Wait for each step to complete
+            const result = await waitForStep(i, delay);
+            console.log(`Step ${i} completed:`, result);
+        }
+        
+        console.log('All steps completed!');
+        return 'Process finished successfully';
+        
+    } catch (error) {
+        console.error('Error in process:', error.message);
+        throw error;
+    }
+}
+
+// Helper function that returns a Promise
+function waitForStep(step, delay) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(`Step ${step} result`);
+        }, delay * 1000);
+    });
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Async/Await Benefits:</strong>
+                                        <ul class="small">
+                                            <li>Looks like synchronous code</li>
+                                            <li>Easy error handling with try/catch</li>
+                                            <li>No callback hell or .then() chains</li>
+                                            <li>Must be used inside async functions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Fetch API -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white">
+                            <h3><i class="fas fa-cloud-download-alt"></i> 4. Fetch API</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Try It: API Requests</h5>
+                                    <div class="demo-controls mb-3">
+                                        <label for="apiEndpoint" class="form-label">API Endpoint:</label>
+                                        <select class="form-select mb-2" id="apiEndpoint">
+                                            <option value="users">JSONPlaceholder - Users</option>
+                                            <option value="posts">JSONPlaceholder - Posts</option>
+                                            <option value="todos">JSONPlaceholder - Todos</option>
+                                            <option value="random-user">Random User API</option>
+                                            <option value="fake-delay">Simulated Slow API</option>
+                                        </select>
+                                        
+                                        <label for="fetchLimit" class="form-label">Limit results:</label>
+                                        <input type="number" class="form-control mb-2" id="fetchLimit" placeholder="5" min="1" max="10" value="3">
+                                        
+                                        <button class="btn btn-danger me-2" onclick="runFetchDemo()">Fetch Data</button>
+                                        <button class="btn btn-info me-2" onclick="runPostDemo()">POST Request</button>
+                                        <button class="btn btn-warning me-2" onclick="runFetchErrorDemo()">Error Handling</button>
+                                        <button class="btn btn-secondary" onclick="clearFetchLog()">Clear Log</button>
+                                    </div>
+                                    
+                                    <!-- OUTPUT AREA -->
+                                    <div class="mt-3">
+                                        <h6>📺 Fetch Output:</h6>
+                                        <div id="fetchResult" class="border p-3 bg-light" style="min-height: 150px; max-height: 400px; overflow-y: auto;">
+                                            <em class="text-muted">Click "Fetch Data" to make API requests...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Code:</h5>
+                                    <pre class="bg-light p-3 rounded"><code>// Fetch API Examples
+async function fetchData(endpoint) {
+    try {
+        console.log('Fetching data...');
+        
+        // GET request
+        const response = await fetch(endpoint);
+        
+        // Check if response is ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('Data received:', data);
+        return data;
+        
+    } catch (error) {
+        console.error('Fetch error:', error.message);
+        throw error;
+    }
+}
+
+// POST request
+async function postData(endpoint, data) {
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        return await response.json();
+    } catch (error) {
+        console.error('POST error:', error);
+    }
+}</code></pre>
+                                    <div class="mt-2">
+                                        <strong>Fetch API Features:</strong>
+                                        <ul class="small">
+                                            <li>Promise-based HTTP requests</li>
+                                            <li>Supports GET, POST, PUT, DELETE</li>
+                                            <li>Returns Response objects</li>
+                                            <li>Built into modern browsers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Exercise -->
+        <section class="demo-section mb-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3><i class="fas fa-pencil-alt"></i> Practice: Weather App</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Build a weather app that demonstrates async JavaScript concepts:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="demo-controls mb-3">
+                                        <label for="cityName" class="form-label">City Name:</label>
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" id="cityName" placeholder="London, Paris, New York">
+                                            <button class="btn btn-success" onclick="getWeatherInfo()">Get Weather</button>
+                                        </div>
+                                        
+                                        <button class="btn btn-info me-2" onclick="getRandomCityWeather()">Random City</button>
+                                        <button class="btn btn-warning me-2" onclick="getMultipleCitiesWeather()">Multiple Cities</button>
+                                        <button class="btn btn-secondary" onclick="clearWeatherLog()">Clear</button>
+                                    </div>
+                                    
+                                    <!-- Weather Display -->
+                                    <div class="mt-3">
+                                        <h6>🌤️ Weather Information:</h6>
+                                        <div id="weatherDisplay" class="border rounded p-3 bg-light" style="min-height: 200px;">
+                                            <em class="text-muted">Enter a city name and click "Get Weather" to see weather information...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Weather App Code:</h5>
+                                    <pre class="bg-light p-3 rounded small"><code>// Weather App Implementation
+class WeatherApp {
+    constructor() {
+        this.apiKey = 'demo-key';
+        this.baseUrl = 'https://api.openweathermap.org/data/2.5';
+    }
+    
+    async getWeather(city) {
+        try {
+            // Show loading state
+            this.showLoading();
+            
+            // Simulate API call (using demo data)
+            const weatherData = await this.simulateWeatherAPI(city);
+            
+            // Update UI
+            this.displayWeather(weatherData);
+            
+        } catch (error) {
+            this.showError(error.message);
+        }
+    }
+    
+    async simulateWeatherAPI(city) {
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Return mock weather data
+        return {
+            city: city,
+            temperature: Math.round(Math.random() * 30 + 5),
+            condition: this.getRandomCondition(),
+            humidity: Math.round(Math.random() * 50 + 30)
+        };
+    }
+}</code></pre>
+                                    
+                                    <!-- API Log -->
+                                    <div class="mt-3">
+                                        <h6>📡 API Request Log:</h6>
+                                        <div id="weatherResult" class="border p-3 bg-light" style="min-height: 120px; max-height: 200px; overflow-y: auto;">
+                                            <em class="text-muted">API request logs will appear here...</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back Button -->
+        <div class="text-center mb-5">
+            <a href="/module/6" class="btn btn-lg btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Module 6
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 JavaScript Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demo-module-6.js"></script>
+</body>
+</html>

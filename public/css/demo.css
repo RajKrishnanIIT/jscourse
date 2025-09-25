@@ -1,0 +1,104 @@
+/* filepath: public/css/demo.css */
+.demo-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.demo-section {
+    scroll-margin-top: 100px;
+}
+
+.demo-controls {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.demo-controls input,
+.demo-controls select {
+    margin-bottom: 0.5rem;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.alert {
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn {
+    margin-right: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .demo-header {
+        padding: 1rem;
+    }
+    
+    .demo-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+    }
+}
+
+/* Animation for results */
+.alert.show-result {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Code highlighting improvements */
+.language-javascript {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    line-height: 1.4;
+}
+
+/* Interactive elements styling */
+.demo-controls label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.demo-controls input:focus,
+.demo-controls select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
